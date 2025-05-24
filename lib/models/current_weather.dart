@@ -105,6 +105,20 @@ class CurrentWeather {
         'Sunrise: $_sunrise, Sunset: $_sunset';
   }
 
+  factory CurrentWeather.fromOpenWeatherData(Map<String, dynamic> data) {
+    return CurrentWeather(
+      city: data['name'],
+      description: data['weather'][0]['description'],
+      currentTemp: data['main']['temp'].toDouble(),
+      currentTime: DateTime.fromMillisecondsSinceEpoch((data['dt'] * 1000).toInt(), isUtc: true).toLocal(),
+      sunrise: DateTime.fromMillisecondsSinceEpoch((data['sys']['sunrise'] * 1000).toInt(), isUtc: true).toLocal(),
+      sunset: DateTime.fromMillisecondsSinceEpoch((data['sys']['sunset'] * 1000).toInt(), isUtc: true).toLocal(),
+    );
+  }
+
+
+
+
 }
 
 
